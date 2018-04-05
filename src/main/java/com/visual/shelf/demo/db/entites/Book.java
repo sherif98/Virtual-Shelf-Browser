@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.List;
 
 @Getter
@@ -14,6 +15,9 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 public class Book {
+
+    @Id
+    private String isbn;
     private String description;
     private List<String> authors;
     private String libraryLocation;
