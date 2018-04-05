@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,4 +15,7 @@ import javax.persistence.Entity;
 @ToString
 public class Book {
     private String description;
+    private List<String> authors;
+    private String libraryLocation;
+    private Category category;
 }
