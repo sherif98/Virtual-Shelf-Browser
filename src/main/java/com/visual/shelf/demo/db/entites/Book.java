@@ -19,7 +19,6 @@ public class Book {
     @Id
     private String isbn;
     private String description;
-    private List<String> authors;
     private String libraryLocation;
     private Category category;
 }
