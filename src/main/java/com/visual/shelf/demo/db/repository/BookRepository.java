@@ -1,4 +1,4 @@
-package com.visual.shelf.demo.repository;
+package com.visual.shelf.demo.db.repository;
 
 import com.visual.shelf.demo.db.entites.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
