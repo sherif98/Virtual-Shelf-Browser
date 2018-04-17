@@ -33,4 +33,6 @@ public class Book {
 
     @Column(columnDefinition = "text")
     private String thumbnailLink;
+
+
 }
