@@ -15,8 +15,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @JsonPropertyOrder({
     "country",
     "saleability",
-    "isEbook",
-    "buyLink"
+    "isEbook"
 })
 public class SaleInfo {
 
@@ -26,8 +25,6 @@ public class SaleInfo {
     private String saleability;
     @JsonProperty("isEbook")
     private Boolean isEbook;
-    @JsonProperty("buyLink")
-    private String buyLink;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -61,16 +58,6 @@ public class SaleInfo {
         this.isEbook = isEbook;
     }
 
-    @JsonProperty("buyLink")
-    public String getBuyLink() {
-        return buyLink;
-    }
-
-    @JsonProperty("buyLink")
-    public void setBuyLink(String buyLink) {
-        this.buyLink = buyLink;
-    }
-
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -83,7 +70,7 @@ public class SaleInfo {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("country", country).append("saleability", saleability).append("isEbook", isEbook).append("buyLink", buyLink).append("additionalProperties", additionalProperties).toString();
+        return new ToStringBuilder(this).append("country", country).append("saleability", saleability).append("isEbook", isEbook).append("additionalProperties", additionalProperties).toString();
     }
 
 }

@@ -1,22 +1,36 @@
 package com.visual.shelf.demo.db.entites;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Getter
 @Setter
 @Entity
 @EqualsAndHashCode
 @ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
-    @Id
-    private String isbn;
+
+    @EmbeddedId
+    private BookKey key;
+
+    @Column(columnDefinition = "text")
+    private String title;
+
+    @Column(columnDefinition = "text")
     private String description;
+
+    @Column(columnDefinition = "text")
     private String libraryLocation;
-    private Category category;
+
+    @Column(columnDefinition = "text")
+    private String reviewsLink;
+
+    @Column(columnDefinition = "text")
+    private String thumbnailLink;
 }

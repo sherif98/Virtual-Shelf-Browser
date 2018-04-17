@@ -13,18 +13,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "isAvailable",
-    "acsTokenLink",
-    "downloadLink"
+    "isAvailable"
 })
 public class Epub {
 
     @JsonProperty("isAvailable")
     private Boolean isAvailable;
-    @JsonProperty("acsTokenLink")
-    private String acsTokenLink;
-    @JsonProperty("downloadLink")
-    private String downloadLink;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -36,26 +30,6 @@ public class Epub {
     @JsonProperty("isAvailable")
     public void setIsAvailable(Boolean isAvailable) {
         this.isAvailable = isAvailable;
-    }
-
-    @JsonProperty("acsTokenLink")
-    public String getAcsTokenLink() {
-        return acsTokenLink;
-    }
-
-    @JsonProperty("acsTokenLink")
-    public void setAcsTokenLink(String acsTokenLink) {
-        this.acsTokenLink = acsTokenLink;
-    }
-
-    @JsonProperty("downloadLink")
-    public String getDownloadLink() {
-        return downloadLink;
-    }
-
-    @JsonProperty("downloadLink")
-    public void setDownloadLink(String downloadLink) {
-        this.downloadLink = downloadLink;
     }
 
     @JsonAnyGetter
@@ -70,7 +44,7 @@ public class Epub {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("isAvailable", isAvailable).append("acsTokenLink", acsTokenLink).append("downloadLink", downloadLink).append("additionalProperties", additionalProperties).toString();
+        return new ToStringBuilder(this).append("isAvailable", isAvailable).append("additionalProperties", additionalProperties).toString();
     }
 
 }

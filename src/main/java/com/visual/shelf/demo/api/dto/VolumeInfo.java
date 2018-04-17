@@ -33,9 +33,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
     "language",
     "previewLink",
     "infoLink",
-    "canonicalVolumeLink",
-    "subtitle",
-    "panelizationSummary"
+    "canonicalVolumeLink"
 })
 public class VolumeInfo {
 
@@ -79,10 +77,6 @@ public class VolumeInfo {
     private String infoLink;
     @JsonProperty("canonicalVolumeLink")
     private String canonicalVolumeLink;
-    @JsonProperty("subtitle")
-    private String subtitle;
-    @JsonProperty("panelizationSummary")
-    private PanelizationSummary panelizationSummary;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -286,26 +280,6 @@ public class VolumeInfo {
         this.canonicalVolumeLink = canonicalVolumeLink;
     }
 
-    @JsonProperty("subtitle")
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    @JsonProperty("subtitle")
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
-
-    @JsonProperty("panelizationSummary")
-    public PanelizationSummary getPanelizationSummary() {
-        return panelizationSummary;
-    }
-
-    @JsonProperty("panelizationSummary")
-    public void setPanelizationSummary(PanelizationSummary panelizationSummary) {
-        this.panelizationSummary = panelizationSummary;
-    }
-
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -318,7 +292,7 @@ public class VolumeInfo {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("title", title).append("authors", authors).append("publisher", publisher).append("publishedDate", publishedDate).append("description", description).append("industryIdentifiers", industryIdentifiers).append("readingModes", readingModes).append("pageCount", pageCount).append("printType", printType).append("categories", categories).append("averageRating", averageRating).append("ratingsCount", ratingsCount).append("maturityRating", maturityRating).append("allowAnonLogging", allowAnonLogging).append("contentVersion", contentVersion).append("imageLinks", imageLinks).append("language", language).append("previewLink", previewLink).append("infoLink", infoLink).append("canonicalVolumeLink", canonicalVolumeLink).append("subtitle", subtitle).append("panelizationSummary", panelizationSummary).append("additionalProperties", additionalProperties).toString();
+        return new ToStringBuilder(this).append("title", title).append("authors", authors).append("publisher", publisher).append("publishedDate", publishedDate).append("description", description).append("industryIdentifiers", industryIdentifiers).append("readingModes", readingModes).append("pageCount", pageCount).append("printType", printType).append("categories", categories).append("averageRating", averageRating).append("ratingsCount", ratingsCount).append("maturityRating", maturityRating).append("allowAnonLogging", allowAnonLogging).append("contentVersion", contentVersion).append("imageLinks", imageLinks).append("language", language).append("previewLink", previewLink).append("infoLink", infoLink).append("canonicalVolumeLink", canonicalVolumeLink).append("additionalProperties", additionalProperties).toString();
     }
 
 }
