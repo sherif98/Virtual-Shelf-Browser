@@ -31,4 +31,9 @@ public class BookSearchServiceImpl implements BookSearchService {
     public List<Book> findByOwnerId(Long ownerId) {
         return bookRepository.findByKey_OwnerId(ownerId);
     }
+
+    @Override
+    public List<Book> findAllBooks() {
+        return bookRepository.findAll();
+    }
 }
