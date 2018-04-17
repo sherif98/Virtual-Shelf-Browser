@@ -28,4 +28,6 @@ public class User {
     private String password;
 
     private AuthorityLevel authorityLevel;
+
+
 }
