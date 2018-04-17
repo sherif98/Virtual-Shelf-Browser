@@ -1,4 +1,4 @@
-package com.visual.shelf.demo.service.search;
+package com.visual.shelf.demo.service.book.search;
 
 import com.visual.shelf.demo.api.client.BookClient;
 import com.visual.shelf.demo.api.dto.Item;

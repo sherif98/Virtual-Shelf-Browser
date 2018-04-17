@@ -1,4 +1,4 @@
-package com.visual.shelf.demo.service.update;
+package com.visual.shelf.demo.service.book.update;
 
 
 import com.visual.shelf.demo.db.entites.Book;

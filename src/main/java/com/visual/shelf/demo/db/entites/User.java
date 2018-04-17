@@ -1,6 +1,7 @@
 package com.visual.shelf.demo.db.entites;
 
 import lombok.*;
+import org.springframework.stereotype.Indexed;
 
 import javax.persistence.*;
 
@@ -18,11 +19,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(columnDefinition = "text")
-    private String firstName;
-
-    @Column(columnDefinition = "text")
-    private String lastName;
+    @Column(columnDefinition = "text", unique = true)
+    private String userName;
 
     @Column(columnDefinition = "text")
     private String password;

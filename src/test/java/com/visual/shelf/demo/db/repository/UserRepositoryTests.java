@@ -24,12 +24,10 @@ public class UserRepositoryTests {
 
     @Test
     public void persistAndRetrieveUser() {
-        final String firstName = "first";
-        final String lastName = "last";
+        final String userName = "userName";
         final String password = "pass";
         User user = User.builder()
-                .firstName(firstName)
-                .lastName(lastName)
+                .userName(userName)
                 .password(password)
                 .authorityLevel(AuthorityLevel.ADMIN)
                 .build();
@@ -39,8 +37,7 @@ public class UserRepositoryTests {
 
         Optional<User> retrievedUser = userRepository.findById(id);
         assertTrue(retrievedUser.isPresent());
-        assertEquals(firstName, retrievedUser.get().getFirstName());
-        assertEquals(lastName, retrievedUser.get().getLastName());
+        assertEquals(userName, retrievedUser.get().getUserName());
         assertEquals(password, retrievedUser.get().getPassword());
         assertEquals(AuthorityLevel.ADMIN, retrievedUser.get().getAuthorityLevel());
     }

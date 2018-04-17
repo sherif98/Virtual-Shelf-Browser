@@ -1,4 +1,4 @@
-package com.visual.shelf.demo.service.add;
+package com.visual.shelf.demo.service.book.add;
 
 
 import com.visual.shelf.demo.db.entites.Book;
