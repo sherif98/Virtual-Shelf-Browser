@@ -48,11 +48,13 @@ public class DemoApplication implements CommandLineRunner {
         books.forEach(bookRepository::save);
 
 
-        User user = User.builder().authorityLevel(AuthorityLevel.ADMIN)
+        User admin = User.builder().authorityLevel(AuthorityLevel.ADMIN)
                 .password("admin")
                 .userName("admin").build();
 
-        userRepository.save(user);
+        userRepository.save(admin);
 
+        final Optional<User> retrievedAdmin = userRepository.findByUserName("admin");
+        System.out.println(retrievedAdmin);
     }
 }
