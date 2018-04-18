@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface PromoteService {
 
-    Optional<AuthorityLevel> promoteUser(String userName, AuthorityLevel authorityLevel);
+    Optional<AuthorityLevel> promoteUser(Long requesterId, String userName, AuthorityLevel authorityLevel);
 }

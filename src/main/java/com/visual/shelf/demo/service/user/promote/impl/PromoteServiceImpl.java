@@ -16,9 +16,10 @@ public class PromoteServiceImpl implements PromoteService {
     private UserRepository userRepository;
 
     @Override
-    public Optional<AuthorityLevel> promoteUser(String userName, AuthorityLevel authorityLevel) {
+    public Optional<AuthorityLevel> promoteUser(Long requesterId, String userName, AuthorityLevel authorityLevel) {
         Optional<User> user = userRepository.findByUserName(userName);
-        if(!user.isPresent()){
+        final Optional<User> admin = userRepository.findById(requesterId);
+        if (!(user.isPresent() && admin.isPresent() && admin.get().getAuthorityLevel().equals(AuthorityLevel.ADMIN))) {
             return Optional.empty();
         }
         user.get().setAuthorityLevel(authorityLevel);

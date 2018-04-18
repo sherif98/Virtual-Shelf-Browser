@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PromoteUserRequest {
-
+    private Long requesterId;
     private String userName;
     private AuthorityLevel authorityLevel;
 }

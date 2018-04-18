@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Optional;
+
 import static org.junit.Assert.*;
 
 
@@ -28,6 +30,13 @@ public class PromoteServiceTest {
     @Before
     public void clearDataBefore() {
         userRepository.deleteAll();
+        User admin = User.builder()
+                .userName("admin")
+                .password("admin")
+                .authorityLevel(AuthorityLevel.ADMIN)
+                .build();
+
+        userRepository.save(admin);
     }
 
     @Test
@@ -36,16 +45,22 @@ public class PromoteServiceTest {
                 .password("abcd")
                 .userName("tarrok").build();
 
+        final Optional<User> admin = userRepository.findByUserName("admin");
+        assertTrue(admin.isPresent());
+
         userRepository.save(user);
-        assertTrue(promoteService.promoteUser("tarrok", AuthorityLevel.ADMIN).isPresent());
+        assertTrue(promoteService.promoteUser(admin.get().getId(),
+                "tarrok", AuthorityLevel.ADMIN).isPresent());
         assertEquals(AuthorityLevel.ADMIN, userRepository.findByUserName("tarrok").get().getAuthorityLevel());
     }
 
     @Test
     public void nonExistingUserPromotion() {
-        assertFalse(promoteService.promoteUser("tarrok", AuthorityLevel.ADMIN).isPresent());
+        final Optional<User> admin = userRepository.findByUserName("admin");
+        assertTrue(admin.isPresent());
+        assertFalse(promoteService.promoteUser(admin.get().getId(),
+                "tarrok", AuthorityLevel.ADMIN).isPresent());
     }
-
 
     @After
     public void clearDataAfter() {

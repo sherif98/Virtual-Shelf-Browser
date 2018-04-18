@@ -8,5 +8,4 @@ public interface BookAdditionService {
 
     Optional<Book> addBook(String isbn, Long ownerId, String libraryLocation);
 
-
 }

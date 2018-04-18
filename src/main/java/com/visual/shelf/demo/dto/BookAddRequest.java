@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class BookAddRequest {
-
     private String isbn;
     private Long ownerId;
     private String libraryLocation;

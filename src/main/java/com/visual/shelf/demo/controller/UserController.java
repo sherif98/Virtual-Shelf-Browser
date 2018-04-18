@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
-
     @Autowired
     private LoginService loginService;
 
@@ -33,7 +32,8 @@ public class UserController {
 
     @PutMapping
     public AuthorityLevel promoteUser(@RequestBody PromoteUserRequest promoteUserRequest) {
-        return promoteService.promoteUser(promoteUserRequest.getUserName(), promoteUserRequest.getAuthorityLevel())
+        return promoteService.promoteUser(promoteUserRequest.getRequesterId(),
+                promoteUserRequest.getUserName(), promoteUserRequest.getAuthorityLevel())
                 .orElseThrow(() -> new UserNotFoundException(promoteUserRequest.getUserName()));
     }
 
