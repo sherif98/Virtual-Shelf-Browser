@@ -6,6 +6,8 @@ import com.visual.shelf.demo.api.dto.mapper.BookResultSetMapper;
 import com.visual.shelf.demo.db.entites.Book;
 import com.visual.shelf.demo.db.repository.BookRepository;
 import com.visual.shelf.demo.service.book.search.api.BookSearchService;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,11 @@ public class BookSearchServiceTests {
     @Autowired
     private BookClient bookClient;
 
+
+    @Before
+    public void clearDataBefore() {
+        bookRepository.deleteAll();
+    }
 
     @Test
     public void findBookByISBN() {
@@ -89,5 +96,11 @@ public class BookSearchServiceTests {
 
         assertEquals(books.size(), retrievedBooks.size());
 
+    }
+
+
+    @After
+    public void clearDataAfter() {
+        bookRepository.deleteAll();
     }
 }

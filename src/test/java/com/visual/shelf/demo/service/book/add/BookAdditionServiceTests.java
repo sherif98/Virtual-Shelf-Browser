@@ -4,6 +4,8 @@ package com.visual.shelf.demo.service.book.add;
 import com.visual.shelf.demo.db.entites.Book;
 import com.visual.shelf.demo.db.repository.BookRepository;
 import com.visual.shelf.demo.service.book.add.api.BookAdditionService;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,10 @@ public class BookAdditionServiceTests {
     @Autowired
     private BookRepository bookRepository;
 
+    @Before
+    public void clearDataBefore() {
+        bookRepository.deleteAll();
+    }
 
     @Test
     public void bookShouldBePersisted() {
@@ -40,5 +46,11 @@ public class BookAdditionServiceTests {
         assertEquals(isbn, retrievedBook.get().getKey().getIsbn());
         assertEquals(ownerId, retrievedBook.get().getKey().getOwnerId());
         assertEquals(location, retrievedBook.get().getLibraryLocation());
+    }
+
+
+    @After
+    public void clearDataAfter() {
+        bookRepository.deleteAll();
     }
 }

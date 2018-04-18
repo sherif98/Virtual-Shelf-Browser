@@ -5,6 +5,8 @@ import com.visual.shelf.demo.api.dto.Item;
 import com.visual.shelf.demo.api.dto.mapper.BookResultSetMapper;
 import com.visual.shelf.demo.db.entites.Book;
 import com.visual.shelf.demo.db.entites.BookKey;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,10 @@ public class BookRepositoryTests {
     @Autowired
     private BookRepository bookRepository;
 
+    @Before
+    public void clearDataBefore() {
+        bookRepository.deleteAll();
+    }
 
     @Test
     public void persistAndRetrieveBook() {
@@ -85,6 +91,11 @@ public class BookRepositoryTests {
         List<Book> retrievedBooks = bookRepository.findByKey_OwnerId(ownerId);
 
         assertEquals(books.size(), retrievedBooks.size());
+    }
+
+    @After
+    public void clearDataAfter() {
+        bookRepository.deleteAll();
     }
 
 }

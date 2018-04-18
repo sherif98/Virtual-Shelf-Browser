@@ -49,8 +49,8 @@ public class DemoApplication implements CommandLineRunner {
 
 
         User user = User.builder().authorityLevel(AuthorityLevel.ADMIN)
-                .password("abcd")
-                .userName("tarrok").build();
+                .password("admin")
+                .userName("admin").build();
 
         userRepository.save(user);
 

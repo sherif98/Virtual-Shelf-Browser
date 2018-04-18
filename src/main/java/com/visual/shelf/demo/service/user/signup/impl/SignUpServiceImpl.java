@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class SignUpServiceImpl implements SignUpService{
+public class SignUpServiceImpl implements SignUpService {
 
     @Autowired
     private UserRepository userRepository;
@@ -17,7 +17,7 @@ public class SignUpServiceImpl implements SignUpService{
     @Override
     public Optional<User> signUp(User user) {
 
-        if(userRepository.findByUserName(user.getUserName()).isPresent()){
+        if (userRepository.findByUserName(user.getUserName()).isPresent()) {
             return Optional.empty();
         }
         return Optional.of(userRepository.save(user));

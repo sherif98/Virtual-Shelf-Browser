@@ -4,6 +4,8 @@ import com.visual.shelf.demo.db.entites.AuthorityLevel;
 import com.visual.shelf.demo.db.entites.User;
 import com.visual.shelf.demo.db.repository.UserRepository;
 import com.visual.shelf.demo.service.user.signup.api.SignUpService;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,14 @@ public class SignUpServiceTest {
     @Autowired
     private UserRepository userRepository;
 
+
+    @Before
+    public void clearDataBefore() {
+        userRepository.deleteAll();
+    }
+
     @Test
-    public void existingUserSignUpTest(){
+    public void existingUserSignUpTest() {
         User user = User.builder().authorityLevel(AuthorityLevel.NORMAL_USER)
                 .password("abcd")
                 .userName("tarrok").build();
@@ -37,12 +45,19 @@ public class SignUpServiceTest {
     }
 
     @Test
-    public void nonExistingUserSignUpTest(){
+    public void nonExistingUserSignUpTest() {
         User user = User.builder().authorityLevel(AuthorityLevel.NORMAL_USER)
                 .password("abcd")
                 .userName("tarrok").build();
         assertTrue(signUpService.signUp(user).isPresent());
         assertEquals(user, userRepository.findByUserName("tarrok").get());
     }
+
+
+    @After
+    public void clearDataAfter() {
+        userRepository.deleteAll();
+    }
+
 
 }
