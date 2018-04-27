@@ -1,6 +1,7 @@
 package com.visual.shelf.demo.service.book.search.impl;
 
 import com.visual.shelf.demo.db.entites.Book;
+import com.visual.shelf.demo.db.entites.BookKey;
 import com.visual.shelf.demo.db.repository.BookRepository;
 import com.visual.shelf.demo.service.book.search.api.BookSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,9 @@ public class BookSearchServiceImpl implements BookSearchService {
 
 
     @Override
-    public Optional<Book> findByISBN(String isbn) {
-        return bookRepository.findByKey_Isbn(isbn);
+    public Optional<Book> findByKey(String isbn, Long ownerId) {
+        return bookRepository.findById(BookKey.builder().isbn(isbn).ownerId(ownerId).build());
     }
-
 
     @Override
     public List<Book> findByTitle(String title) {

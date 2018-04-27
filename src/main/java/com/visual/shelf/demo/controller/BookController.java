@@ -26,9 +26,9 @@ public class BookController {
     @Autowired
     private BookUpdateService bookUpdateService;
 
-    @RequestMapping(method = RequestMethod.GET, params = "isbn")
-    public Book findBookByISBN(@RequestParam("isbn") String isbn) {
-        return bookSearchService.findByISBN(isbn).orElseThrow(() -> new BookNotFoundException(isbn));
+    @RequestMapping(method = RequestMethod.GET, params = {"isbn", "ownerId"})
+    public Book findBookById(@RequestParam("isbn") String isbn, @RequestParam("ownerId") Long ownerId) {
+        return bookSearchService.findByKey(isbn, ownerId).orElseThrow(() -> new BookNotFoundException(isbn));
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "title")

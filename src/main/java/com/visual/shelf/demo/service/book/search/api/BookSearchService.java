@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface BookSearchService {
 
-    Optional<Book> findByISBN(String isbn);
+    Optional<Book> findByKey(String isbn, Long ownerId);
 
     List<Book> findByTitle(String title);
 

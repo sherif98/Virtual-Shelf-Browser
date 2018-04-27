@@ -22,7 +22,7 @@ public class BookClientImpl implements BookClient {
     @Override
     public Optional<Item> findBookByISBN(String isbn) {
         BookResultSet bookResultSet = restTemplate.getForObject(FIND_BOOK_BY_ISBN + isbn, BookResultSet.class);
-        if (bookResultSet.getItems().isEmpty()) {
+        if (bookResultSet.getItems() == null || bookResultSet.getItems().isEmpty()) {
             return Optional.empty();
         }
         return Optional.ofNullable(bookResultSet.getItems().get(0));

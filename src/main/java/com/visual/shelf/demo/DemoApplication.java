@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +37,16 @@ public class DemoApplication implements CommandLineRunner {
         SpringApplication.run(DemoApplication.class, args);
     }
 
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/book").allowedOrigins("http://localhost:8000");
+            }
+        };
+    }
+
     @Override
     public void run(String... args) throws Exception {
         final Long ownerId = 123L;
@@ -43,6 +57,10 @@ public class DemoApplication implements CommandLineRunner {
                 .map(Optional::get)
                 .map(book ->
                         BookResultSetMapper.mapToBook(book, ownerId, book.getVolumeInfo().getIndustryIdentifiers().get(0).getIdentifier()))
+                .map(b -> {
+                    b.setLibraryLocation("alex");
+                    return b;
+                })
                 .collect(Collectors.toList());
 
         books.forEach(bookRepository::save);
@@ -53,6 +71,12 @@ public class DemoApplication implements CommandLineRunner {
                 .userName("admin").build();
 
         userRepository.save(admin);
+
+        User bookProvider = User.builder().authorityLevel(AuthorityLevel.BOOK_PROVIDER)
+                .password("rama")
+                .userName("rama").build();
+
+        userRepository.save(bookProvider);
 
         final Optional<User> retrievedAdmin = userRepository.findByUserName("admin");
         System.out.println(retrievedAdmin);
