@@ -4,12 +4,15 @@ import com.visual.shelf.demo.db.entites.Book;
 import com.visual.shelf.demo.dto.BookAddRequest;
 import com.visual.shelf.demo.dto.BookDeleteRequest;
 import com.visual.shelf.demo.exception.BookNotFoundException;
+import com.visual.shelf.demo.exception.InvalidDataException;
 import com.visual.shelf.demo.service.book.add.api.BookAdditionService;
 import com.visual.shelf.demo.service.book.search.api.BookSearchService;
 import com.visual.shelf.demo.service.book.update.api.BookUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -47,7 +50,10 @@ public class BookController {
     }
 
     @PostMapping
-    public Book addBook(@RequestBody BookAddRequest bookAddRequest) {
+    public Book addBook(@RequestBody @Valid BookAddRequest bookAddRequest, Errors errors) {
+        if(errors.hasErrors()) {
+            throw new InvalidDataException(errors.getFieldErrors());
+        }
         return bookAdditionService.addBook(bookAddRequest.getIsbn(),
                 bookAddRequest.getOwnerId(),
                 bookAddRequest.getLibraryLocation()).orElseThrow(() -> new BookNotFoundException(bookAddRequest.getIsbn()));

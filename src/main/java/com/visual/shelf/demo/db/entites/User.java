@@ -1,6 +1,7 @@
 package com.visual.shelf.demo.db.entites;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 
@@ -19,9 +20,11 @@ public class User {
     private Long id;
 
     @Column(columnDefinition = "text")
+    @Length(min = 5, max = 20)
     private String userName;
 
     @Column(columnDefinition = "text")
+    @Length(min = 5, max = 20)
     private String password;
 
     private AuthorityLevel authorityLevel;

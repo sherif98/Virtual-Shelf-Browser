@@ -53,7 +53,7 @@ public class BookSearchServiceTests {
 
         bookRepository.save(bookEntity);
 
-        Optional<Book> retrievedBook = bookSearchService.findByISBN(isbn);
+        Optional<Book> retrievedBook = bookSearchService.findByKey(isbn, ownerId);
         assertTrue(retrievedBook.isPresent());
 
         assertEquals("Java in a Nutshell", retrievedBook.get().getTitle());

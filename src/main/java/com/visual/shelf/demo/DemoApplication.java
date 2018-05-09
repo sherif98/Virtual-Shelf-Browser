@@ -73,8 +73,8 @@ public class DemoApplication implements CommandLineRunner {
         userRepository.save(admin);
 
         User bookProvider = User.builder().authorityLevel(AuthorityLevel.BOOK_PROVIDER)
-                .password("rama")
-                .userName("rama").build();
+                .password("ramadan")
+                .userName("ramadan").build();
 
         userRepository.save(bookProvider);
 

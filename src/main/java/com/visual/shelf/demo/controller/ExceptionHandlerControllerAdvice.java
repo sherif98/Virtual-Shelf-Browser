@@ -1,14 +1,13 @@
 package com.visual.shelf.demo.controller;
 
 
-import com.visual.shelf.demo.exception.BookNotFoundException;
-import com.visual.shelf.demo.exception.DuplicateUserException;
-import com.visual.shelf.demo.exception.ErrorResponse;
-import com.visual.shelf.demo.exception.UserNotFoundException;
+import com.visual.shelf.demo.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class ExceptionHandlerControllerAdvice {
@@ -33,5 +32,14 @@ public class ExceptionHandlerControllerAdvice {
     public ErrorResponse duplicateUser(DuplicateUserException exc) {
         String userName = exc.getUserName();
         return new ErrorResponse(String.format("User already exists with user name %s", userName));
+    }
+
+    @ExceptionHandler(InvalidDataException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse userNotFound(InvalidDataException exc) {
+        String errorMessage = exc.getFieldErrors().stream()
+                .map(fieldError -> String.format("%s:%s", fieldError.getField(), fieldError.getDefaultMessage()))
+                .collect(Collectors.joining("\n"));
+        return new ErrorResponse(errorMessage);
     }
 }

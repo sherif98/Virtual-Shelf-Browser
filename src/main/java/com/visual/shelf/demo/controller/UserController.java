@@ -6,13 +6,16 @@ import com.visual.shelf.demo.db.entites.User;
 import com.visual.shelf.demo.db.repository.UserRepository;
 import com.visual.shelf.demo.dto.PromoteUserRequest;
 import com.visual.shelf.demo.exception.DuplicateUserException;
+import com.visual.shelf.demo.exception.InvalidDataException;
 import com.visual.shelf.demo.exception.UserNotFoundException;
 import com.visual.shelf.demo.service.user.login.api.LoginService;
 import com.visual.shelf.demo.service.user.promote.api.PromoteService;
 import com.visual.shelf.demo.service.user.signup.api.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -45,7 +48,10 @@ public class UserController {
     }
 
     @PostMapping
-    public User signUp(@RequestBody User user) {
+    public User signUp(@RequestBody @Valid User user, Errors errors) {
+        if (errors.hasErrors()) {
+            throw new InvalidDataException(errors.getFieldErrors());
+        }
         return signUpService.signUp(user).orElseThrow(() -> new DuplicateUserException(user.getUserName()));
     }
 
